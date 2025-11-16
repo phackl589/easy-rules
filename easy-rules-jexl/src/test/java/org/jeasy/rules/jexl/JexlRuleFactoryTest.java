@@ -40,7 +40,11 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -57,9 +61,9 @@ public class JexlRuleFactoryTest {
                 .namespaces(namespaces)
                 .strict(false)
                 .create();
-        return Arrays.asList(new Object[][] {
-                { new JexlRuleFactory(new YamlRuleDefinitionReader(), jexlEngine), "yml" },
-                { new JexlRuleFactory(new JsonRuleDefinitionReader(), jexlEngine), "json" },
+        return Arrays.asList(new Object[][]{
+                {new JexlRuleFactory(new YamlRuleDefinitionReader(), jexlEngine), "yml"},
+                {new JexlRuleFactory(new JsonRuleDefinitionReader(), jexlEngine), "json"},
         });
     }
 
@@ -154,8 +158,8 @@ public class JexlRuleFactoryTest {
 
         // when
         Assertions.assertThatThrownBy(() -> factory.createRule(new FileReader(rulesDescriptor)))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Invalid composite rule type, must be one of [UnitRuleGroup, ConditionalRuleGroup, ActivationRuleGroup]");
+                  .isInstanceOf(IllegalArgumentException.class)
+                  .hasMessage("Invalid composite rule type, must be one of [UnitRuleGroup, ConditionalRuleGroup, ActivationRuleGroup]");
 
         // then
         // expected exception
@@ -169,8 +173,8 @@ public class JexlRuleFactoryTest {
 
         // when
         Assertions.assertThatThrownBy(() -> factory.createRule(new FileReader(rulesDescriptor)))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Composite rules must have composing rules specified");
+                  .isInstanceOf(IllegalArgumentException.class)
+                  .hasMessage("Composite rules must have composing rules specified");
 
         // then
         // expected exception
@@ -184,8 +188,8 @@ public class JexlRuleFactoryTest {
 
         // when
         Assertions.assertThatThrownBy(() -> factory.createRule(new FileReader(rulesDescriptor)))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Non-composite rules cannot have composing rules");
+                  .isInstanceOf(IllegalArgumentException.class)
+                  .hasMessage("Non-composite rules cannot have composing rules");
 
         // then
         // expected exception

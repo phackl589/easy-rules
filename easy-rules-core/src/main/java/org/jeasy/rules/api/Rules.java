@@ -28,13 +28,14 @@ import org.jeasy.rules.core.RuleProxy;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 
 /**
  * This class encapsulates a set of rules and represents a rules namespace.
- * Rules must have a unique name within a rules namespace.
- * 
+ * Rules must have a unique name within a rules' namespace.
+ * <p>
  * Rules will be compared to each other based on {@link Rule#compareTo(Object)}
  * method, so {@link Rule}'s implementations are expected to correctly implement
  * {@code compareTo} to ensure unique rule names within a single namespace.
@@ -105,10 +106,7 @@ public class Rules implements Iterable<Rule> {
      */
     public void unregister(final String ruleName) {
         Objects.requireNonNull(ruleName);
-        Rule rule = findRuleByName(ruleName);
-        if (rule != null) {
-            unregister(rule);
-        }
+        findRuleByName(ruleName).ifPresent(this::unregister);
     }
 
     /**
@@ -146,10 +144,9 @@ public class Rules implements Iterable<Rule> {
         return rules.iterator();
     }
 
-    private Rule findRuleByName(String ruleName) {
+    private Optional<Rule> findRuleByName(String ruleName) {
         return rules.stream()
                 .filter(rule -> rule.getName().equalsIgnoreCase(ruleName))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 }

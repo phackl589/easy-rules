@@ -25,9 +25,17 @@ package org.jeasy.rules.core;
 
 import org.junit.jupiter.api.Test;
 
-import java.lang.annotation.*;
+import java.lang.annotation.Annotation;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UtilsTest {
 
@@ -35,14 +43,14 @@ public class UtilsTest {
     public void findAnnotationWithClassWhereAnnotationIsPresent() {
         Annotation foo = Utils.findAnnotation(Foo.class, AnnotationIsPresent.class);
 
-        assertCorrectAnnotationIsFound(Foo.class, foo);
+        assertCorrectAnnotationIsFound(foo);
     }
 
     @Test
     public void findAnnotationWithClassWhereAnnotationIsPresentViaMetaAnnotation() {
         Annotation foo = Utils.findAnnotation(Foo.class, AnnotationIsPresentViaMetaAnnotation.class);
 
-        assertCorrectAnnotationIsFound(Foo.class, foo);
+        assertCorrectAnnotationIsFound(foo);
     }
 
     @Test
@@ -67,11 +75,10 @@ public class UtilsTest {
         assertFalse(Utils.isAnnotationPresent(Foo.class, Object.class));
     }
 
-    private static void assertCorrectAnnotationIsFound(
-            Class<?> expectedAnnotationType, Annotation actualAnnotation) {
+    private static void assertCorrectAnnotationIsFound(Annotation actualAnnotation) {
 
         assertNotNull(actualAnnotation);
-        assertEquals(expectedAnnotationType, actualAnnotation.annotationType());
+        assertEquals(Foo.class, actualAnnotation.annotationType());
     }
 
     @Retention(RetentionPolicy.RUNTIME)

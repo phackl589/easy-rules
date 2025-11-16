@@ -27,7 +27,11 @@ import org.assertj.core.api.Assertions;
 import org.jeasy.rules.annotation.Action;
 import org.jeasy.rules.annotation.Condition;
 import org.jeasy.rules.annotation.Priority;
-import org.jeasy.rules.api.*;
+import org.jeasy.rules.api.Facts;
+import org.jeasy.rules.api.RuleListener;
+import org.jeasy.rules.api.Rules;
+import org.jeasy.rules.api.RulesEngineListener;
+import org.jeasy.rules.api.RulesEngineParameters;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -41,7 +45,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class DefaultRulesEngineTest extends AbstractTest {
 

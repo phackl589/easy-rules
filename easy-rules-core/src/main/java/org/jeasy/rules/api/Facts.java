@@ -128,7 +128,7 @@ public class Facts implements Iterable<Fact<?>> {
 
     /**
      * Return a copy of the facts as a map. It is not intended to manipulate
-     * facts outside of the rules engine (aka other than manipulating them through rules).
+     * facts outside the rules engine (aka other than manipulating them through rules).
      *
      * @return a copy of the current facts as a {@link HashMap}
      */

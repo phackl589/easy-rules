@@ -27,7 +27,11 @@ import org.jeasy.rules.api.RulesEngineParameters;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 
 public class SkipOnFirstAppliedRuleTest extends AbstractTest {
 

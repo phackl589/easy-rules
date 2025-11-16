@@ -31,7 +31,11 @@ import org.jeasy.rules.api.Rule;
 import org.jeasy.rules.api.Rules;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class RuleProxyTest {
 
@@ -81,7 +85,7 @@ public class RuleProxyTest {
         Rule proxy2 = RuleProxy.asRule(proxy1);
         Rule proxy3 = RuleProxy.asRule(proxy2);
         // @see Object#equals(Object) reflexive
-        assertEquals(rule,rule);
+        assertEquals(rule, rule);
         assertEquals(proxy1, proxy1);
         assertEquals(proxy2, proxy2);
         assertEquals(proxy3, proxy3);
@@ -100,8 +104,8 @@ public class RuleProxyTest {
         assertNotEquals(null, proxy2);
         assertNotEquals(null, proxy3);
     }
-    
-    
+
+
     @Test
     public void invokeHashCode() {
 
@@ -117,27 +121,27 @@ public class RuleProxyTest {
         assertNotEquals(rule, proxy1);
         assertNotEquals(rule.hashCode(), proxy1.hashCode());
     }
-    
+
     @Test
     public void invokeToString() {
 
         Object rule = new DummyRule();
         Rule proxy1 = RuleProxy.asRule(rule);
         Rule proxy2 = RuleProxy.asRule(proxy1);
-        
+
         assertEquals(proxy1.toString(), proxy1.toString());
-                
+
         assertEquals(proxy1.toString(), proxy2.toString());
-        
+
         assertEquals(rule.toString(), proxy1.toString());
     }
 
     @Test
     public void testCompareTo() {
-        
+
         @org.jeasy.rules.annotation.Rule
         class MyComparableRule implements Comparable<MyComparableRule> {
-            
+
             final int comparisonCriteria;
 
             MyComparableRule(int comparisonCriteria) {
@@ -145,11 +149,14 @@ public class RuleProxyTest {
             }
 
             @Condition
-            public boolean when() { return true; }
+            public boolean when() {
+                return true;
+            }
 
             @Action
-            public void then() { }
-            
+            public void then() {
+            }
+
             @Override
             public int compareTo(MyComparableRule otherRule) {
                 return Integer.compare(comparisonCriteria, otherRule.comparisonCriteria);
@@ -171,7 +178,7 @@ public class RuleProxyTest {
             rules.register(rule1, rule2);
 
             Rules mixedRules = new Rules(rule3);
-            mixedRules.register(proxy1,proxy2);
+            mixedRules.register(proxy1, proxy2);
 
             Rules yetAnotherRulesSet = new Rules(proxy1, proxy2);
             yetAnotherRulesSet.register(rule3);
@@ -187,10 +194,13 @@ public class RuleProxyTest {
         class InvalidComparableRule {
 
             @Condition
-            public boolean when() { return true; }
+            public boolean when() {
+                return true;
+            }
 
             @Action
-            public void then() { }
+            public void then() {
+            }
 
             public int compareTo() {
                 return 0;
@@ -208,10 +218,13 @@ public class RuleProxyTest {
         @org.jeasy.rules.annotation.Rule(priority = 1)
         class MyRule {
             @Condition
-            public boolean when() { return true; }
+            public boolean when() {
+                return true;
+            }
 
             @Action
-            public void then() { }
+            public void then() {
+            }
         }
 
         Object rule = new MyRule();
@@ -225,13 +238,18 @@ public class RuleProxyTest {
         @org.jeasy.rules.annotation.Rule
         class MyRule {
             @Condition
-            public boolean when() { return true; }
+            public boolean when() {
+                return true;
+            }
 
             @Action
-            public void then() { }
+            public void then() {
+            }
 
             @Priority
-            public int getPriority() { return 2; }
+            public int getPriority() {
+                return 2;
+            }
         }
 
         Object rule = new MyRule();
@@ -245,13 +263,18 @@ public class RuleProxyTest {
         @org.jeasy.rules.annotation.Rule(priority = 1)
         class MyRule {
             @Condition
-            public boolean when() { return true; }
+            public boolean when() {
+                return true;
+            }
 
             @Action
-            public void then() { }
+            public void then() {
+            }
 
             @Priority
-            public int getPriority() { return 2; }
+            public int getPriority() {
+                return 2;
+            }
         }
 
         Object rule = new MyRule();
@@ -265,10 +288,13 @@ public class RuleProxyTest {
         @org.jeasy.rules.annotation.Rule
         class MyRule {
             @Condition
-            public boolean when() { return true; }
+            public boolean when() {
+                return true;
+            }
 
             @Action
-            public void then() { }
+            public void then() {
+            }
         }
 
         Object rule = new MyRule();
@@ -277,18 +303,21 @@ public class RuleProxyTest {
     }
 
     @org.jeasy.rules.annotation.Rule
-	static class DummyRule {
+    static class DummyRule {
         @Condition
-        public boolean when() { return true; }
+        public boolean when() {
+            return true;
+        }
 
         @Action
-        public void then() { }
-        
+        public void then() {
+        }
+
         @Override
         public String toString() {
-        	return "I am a Dummy rule";
+            return "I am a Dummy rule";
         }
-        
+
     }
 
 }
