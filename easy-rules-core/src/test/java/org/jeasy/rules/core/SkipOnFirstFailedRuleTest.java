@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- *  Copyright (c) 2021, Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
+ *  Copyright (c) 2025, Philip Hackl (philip.hackl90@gmail.com)
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -24,17 +24,14 @@
 package org.jeasy.rules.core;
 
 import org.jeasy.rules.api.RulesEngineParameters;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class SkipOnFirstFailedRuleTest extends AbstractTest {
 
-    @Before
+    @BeforeEach
     public void setup() throws Exception {
         super.setup();
         RulesEngineParameters parameters = new RulesEngineParameters().skipOnFirstFailedRule(true);

@@ -31,43 +31,46 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
-        <junit.version>4.13.1</junit.version>
-        <assertj.version>3.18.1</assertj.version>
-        <mockito.version>3.6.0</mockito.version>
-        <system-lambda.version>1.1.1</system-lambda.version>
-        <slf4j.version>1.7.30</slf4j.version>
-        <jackson.version>2.11.3</jackson.version>
-        <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-        <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
-        <maven-license-plugin.version>3.0</maven-license-plugin.version>
-        <maven-enforcer-plugin.version>1.4.1</maven-enforcer-plugin.version>
+        <junit-jupiter.version>5.14.1</junit-jupiter.version>
+        <assertj.version>3.27.6</assertj.version>
+        <mockito.version>4.11.0</mockito.version>
+        <system-lambda.version>1.2.1</system-lambda.version>
+        <slf4j.version>2.0.17</slf4j.version>
+        <jackson.version>2.20.1</jackson.version>
+        <snakeyaml.version>2.5</snakeyaml.version>
+        <spring.version>5.3.39</spring.version>
+        <jexl.version>3.1</jexl.version>
+        <maven-release-plugin.version>3.2.0</maven-release-plugin.version>
+        <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
+        <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
+        <maven-license-plugin.version>4.6</maven-license-plugin.version>
+        <maven-enforcer-plugin.version>3.6.2</maven-enforcer-plugin.version>
     </properties>
 
     <scm>
-        <url>git@github.com:j-easy/easy-rules.git</url>
-        <connection>scm:git:git@github.com:j-easy/easy-rules.git</connection>
-        <developerConnection>scm:git:git@github.com:j-easy/easy-rules.git</developerConnection>
+        <url>git@github.com:phackl589/easy-rules.git</url>
+        <connection>scm:git:git@github.com:phackl589/easy-rules.git</connection>
+        <developerConnection>scm:git:git@github.com:phackl589/easy-rules.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/j-easy/easy-rules/issues</url>
+        <url>https://github.com/phackl589/easy-rules/issues</url>
     </issueManagement>
 
     <ciManagement>
         <system>Github Actions</system>
-        <url>https://github.com/j-easy/easy-rules/actions</url>
+        <url>https://github.com/phackl589/easy-rules/actions</url>
     </ciManagement>
 
     <developers>
         <developer>
-            <id>benas</id>
-            <name>Mahmoud Ben Hassine</name>
-            <url>http://benas.github.io</url>
-            <email>mahmoud.benhassine@icloud.com</email>
+            <id>phackl589</id>
+            <name>Philip Hackl</name>
+            <url>https://github.com/phackl589</url>
+            <email>philip.hackl90@gmail.com</email>
             <roles>
                 <role>Lead developer</role>
             </roles>
@@ -93,11 +96,42 @@
                 <artifactId>slf4j-simple</artifactId>
                 <version>${slf4j.version}</version>
             </dependency>
-
             <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit.version}</version>
+                <groupId>org.yaml</groupId>
+                <artifactId>snakeyaml</artifactId>
+                <version>${snakeyaml.version}</version>
+            </dependency>
+            <!-- TODO upgrade jackson to tools.jackson version 3.x -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-yaml</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-expression</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-jexl3</artifactId>
+                <version>${jexl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>${junit-jupiter.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-params</artifactId>
+                <version>${junit-jupiter.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -110,6 +144,18 @@
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
                 <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-junit-jupiter</artifactId>
+                <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
@@ -168,7 +214,9 @@
                     <version>${maven-license-plugin.version}</version>
                     <configuration>
                         <properties>
-                            <currentYear>2020</currentYear>
+                            <year>2025</year>
+                            <name>Philip Hackl</name>
+                            <email>philip.hackl90@gmail.com</email>
                         </properties>
                         <strictCheck>true</strictCheck>
                         <includes>

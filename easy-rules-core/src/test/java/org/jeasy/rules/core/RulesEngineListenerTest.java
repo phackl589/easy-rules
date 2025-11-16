@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- *  Copyright (c) 2021, Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
+ *  Copyright (c) 2025, Philip Hackl (philip.hackl90@gmail.com)
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -24,8 +24,8 @@
 package org.jeasy.rules.core;
 
 import org.jeasy.rules.api.RulesEngineListener;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
 import org.mockito.Mock;
 
@@ -38,7 +38,7 @@ public class RulesEngineListenerTest extends AbstractTest {
     @Mock
     private RulesEngineListener rulesEngineListener1, rulesEngineListener2;
 
-    @Before
+    @BeforeEach
     public void setup() throws Exception {
         super.setup();
         rulesEngine.registerRulesEngineListeners(asList(rulesEngineListener1, rulesEngineListener2));

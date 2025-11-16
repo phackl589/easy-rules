@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- *  Copyright (c) 2021, Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
+ *  Copyright (c) 2025, Philip Hackl (philip.hackl90@gmail.com)
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -23,11 +23,11 @@
  */
 package org.jeasy.rules.jexl;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.jeasy.rules.api.Facts;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Lauri Kimmel
@@ -38,7 +38,7 @@ public class JexlRuleTest {
     private final Facts facts = new Facts();
     private final JexlRule jexlRule = new JexlRule();
 
-    @Before
+    @BeforeEach
     public void setUp() {
         jexlRule.when("person.age > 18");
         jexlRule.then("person.setAdult(true);");

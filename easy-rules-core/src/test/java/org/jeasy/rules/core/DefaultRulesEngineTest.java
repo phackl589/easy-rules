@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- *  Copyright (c) 2021, Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
+ *  Copyright (c) 2025, Philip Hackl (philip.hackl90@gmail.com)
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -23,30 +23,25 @@
  */
 package org.jeasy.rules.core;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.inOrder;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.util.List;
-import java.util.Map;
 import org.assertj.core.api.Assertions;
 import org.jeasy.rules.annotation.Action;
 import org.jeasy.rules.annotation.Condition;
 import org.jeasy.rules.annotation.Priority;
-import org.jeasy.rules.api.Facts;
-import org.jeasy.rules.api.RuleListener;
-import org.jeasy.rules.api.Rules;
-import org.jeasy.rules.api.RulesEngineListener;
-import org.jeasy.rules.api.RulesEngineParameters;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.jeasy.rules.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
 import org.mockito.Mock;
+
+import java.util.List;
+import java.util.Map;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
 
 public class DefaultRulesEngineTest extends AbstractTest {
 
@@ -58,32 +53,32 @@ public class DefaultRulesEngineTest extends AbstractTest {
 
     private AnnotatedRule annotatedRule;
 
-    @Before
+    @BeforeEach
     public void setup() throws Exception {
         super.setup();
-        when(rule1.getName()).thenReturn("r");
-        when(rule1.getPriority()).thenReturn(1);
+        lenient().when(rule1.getName()).thenReturn("r");
+        lenient().when(rule1.getPriority()).thenReturn(1);
         annotatedRule = new AnnotatedRule();
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void whenFireRules_thenNullRulesShouldNotBeAccepted() {
-        rulesEngine.fire(null, new Facts());
+        assertThrows(NullPointerException.class, () -> rulesEngine.fire(null, new Facts()));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void whenFireRules_thenNullFactsShouldNotBeAccepted() {
-        rulesEngine.fire(new Rules(), null);
+        assertThrows(NullPointerException.class, () -> rulesEngine.fire(new Rules(), null));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void whenCheckRules_thenNullRulesShouldNotBeAccepted() {
-        rulesEngine.check(null, new Facts());
+        assertThrows(NullPointerException.class, () -> rulesEngine.check(null, new Facts()));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void whenCheckRules_thenNullFactsShouldNotBeAccepted() {
-        rulesEngine.check(new Rules(), null);
+        assertThrows(NullPointerException.class, () -> rulesEngine.check(new Rules(), null));
     }
 
     @Test
@@ -290,7 +285,7 @@ public class DefaultRulesEngineTest extends AbstractTest {
         assertThatThrownBy(rulesEngineListeners::clear).isInstanceOf(UnsupportedOperationException.class);
     }
 
-    @After
+    @AfterEach
     public void clearRules() {
         rules.clear();
     }

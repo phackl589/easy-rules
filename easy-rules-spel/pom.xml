@@ -13,32 +13,31 @@
     <description>Spring Expression Language integration module</description>
 
     <properties>
-        <spring.version>5.3.1</spring.version>
     </properties>
 
     <scm>
-        <url>git@github.com:j-easy/easy-rules.git</url>
-        <connection>scm:git:git@github.com:j-easy/easy-rules.git</connection>
-        <developerConnection>scm:git:git@github.com:j-easy/easy-rules.git</developerConnection>
+        <url>git@github.com:phackl589/easy-rules.git</url>
+        <connection>scm:git:git@github.com:phackl589/easy-rules.git</connection>
+        <developerConnection>scm:git:git@github.com:phackl589/easy-rules.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/j-easy/easy-rules/issues</url>
+        <url>https://github.com/phackl589/easy-rules/issues</url>
     </issueManagement>
 
     <ciManagement>
         <system>Github Actions</system>
-        <url>https://github.com/j-easy/easy-rules/actions</url>
+        <url>https://github.com/phackl589/easy-rules/actions</url>
     </ciManagement>
 
     <developers>
         <developer>
-            <id>benas</id>
-            <name>Mahmoud Ben Hassine</name>
-            <url>http://benas.github.io</url>
-            <email>mahmoud.benhassine@icloud.com</email>
+            <id>phackl589</id>
+            <name>Philip Hackl</name>
+            <url>https://github.com/phackl589</url>
+            <email>philip.hackl90@gmail.com</email>
             <roles>
                 <role>Lead developer</role>
             </roles>
@@ -62,7 +61,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-expression</artifactId>
-            <version>${spring.version}</version>
         </dependency>
 
         <!-- test dependencies -->
@@ -74,12 +72,16 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -90,6 +92,11 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

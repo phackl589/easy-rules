@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- *  Copyright (c) 2021, Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
+ *  Copyright (c) 2025, Philip Hackl (philip.hackl90@gmail.com)
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -29,12 +29,9 @@ import org.jeasy.rules.annotation.Condition;
 import org.jeasy.rules.annotation.Priority;
 import org.jeasy.rules.api.Rule;
 import org.jeasy.rules.api.Rules;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class RuleProxyTest {
 
@@ -70,10 +67,10 @@ public class RuleProxyTest {
         assertEquals(proxy1.getName(), proxy2.getName());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void asRuleForPojo() {
         Object rule = new Object();
-        Rule proxy = RuleProxy.asRule(rule);
+        assertThrows(IllegalArgumentException.class, () -> RuleProxy.asRule(rule));
     }
 
     @Test
@@ -98,10 +95,10 @@ public class RuleProxyTest {
         assertEquals(proxy2, proxy3);
         assertEquals(proxy3, proxy1);
         // @see Object#equals(Object) non-null
-        assertNotEquals(rule, null);
-        assertNotEquals(proxy1, null);
-        assertNotEquals(proxy2, null);
-        assertNotEquals(proxy3, null);
+        assertNotEquals(null, rule);
+        assertNotEquals(null, proxy1);
+        assertNotEquals(null, proxy2);
+        assertNotEquals(null, proxy3);
     }
     
     
@@ -141,7 +138,7 @@ public class RuleProxyTest {
         @org.jeasy.rules.annotation.Rule
         class MyComparableRule implements Comparable<MyComparableRule> {
             
-            int comparisonCriteria;
+            final int comparisonCriteria;
 
             MyComparableRule(int comparisonCriteria) {
                 this.comparisonCriteria = comparisonCriteria;
@@ -165,9 +162,9 @@ public class RuleProxyTest {
         Rule proxy1 = RuleProxy.asRule(rule1);
         Rule proxy2 = RuleProxy.asRule(rule2);
         Rule proxy3 = RuleProxy.asRule(rule3);
-        assertEquals(proxy1.compareTo(proxy2),-1);
-        assertEquals(proxy2.compareTo(proxy1),1);
-        assertEquals(proxy2.compareTo(proxy3),0);
+        assertEquals(-1, proxy1.compareTo(proxy2));
+        assertEquals(1, proxy2.compareTo(proxy1));
+        assertEquals(0, proxy2.compareTo(proxy3));
 
         try {
             Rules rules = new Rules();
@@ -183,7 +180,7 @@ public class RuleProxyTest {
         }
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testCompareToWithIncorrectSignature() {
 
         @org.jeasy.rules.annotation.Rule
@@ -202,7 +199,7 @@ public class RuleProxyTest {
 
         Object rule = new InvalidComparableRule();
         Rules rules = new Rules();
-        rules.register(rule);
+        assertThrows(IllegalArgumentException.class, () -> rules.register(rule));
     }
 
     @Test

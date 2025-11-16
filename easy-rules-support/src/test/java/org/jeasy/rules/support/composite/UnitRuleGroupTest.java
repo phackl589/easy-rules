@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- *  Copyright (c) 2021, Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
+ *  Copyright (c) 2025, Philip Hackl (philip.hackl90@gmail.com)
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -29,36 +29,33 @@ import org.jeasy.rules.api.Facts;
 import org.jeasy.rules.api.Rule;
 import org.jeasy.rules.api.Rules;
 import org.jeasy.rules.core.DefaultRulesEngine;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class UnitRuleGroupTest {
 
     @Mock
     private Rule rule1, rule2;
 
-    private Facts facts = new Facts();
-    private Rules rules = new Rules();
+    private final Facts facts = new Facts();
+    private final Rules rules = new Rules();
 
-    private DefaultRulesEngine rulesEngine = new DefaultRulesEngine();
+    private final DefaultRulesEngine rulesEngine = new DefaultRulesEngine();
 
     private UnitRuleGroup unitRuleGroup;
 
-
-    @Before
+    @BeforeEach
     public void setUp() {
-        when(rule1.evaluate(facts)).thenReturn(true);
-        when(rule2.evaluate(facts)).thenReturn(true);
-        when(rule2.compareTo(rule1)).thenReturn(1);
+        lenient().when(rule1.evaluate(facts)).thenReturn(true);
+        lenient().when(rule2.evaluate(facts)).thenReturn(true);
+        lenient().when(rule2.compareTo(rule1)).thenReturn(1);
     }
 
     @Test
@@ -171,14 +168,17 @@ public class UnitRuleGroupTest {
     @org.jeasy.rules.annotation.Rule
     public static class MyRule {
         boolean executed;
+
         @Condition
         public boolean when() {
             return true;
         }
+
         @Action
         public void then() {
             executed = true;
         }
+
         public boolean isExecuted() {
             return executed;
         }
@@ -187,14 +187,17 @@ public class UnitRuleGroupTest {
     @org.jeasy.rules.annotation.Rule
     public static class MyAnnotatedRule {
         private boolean executed;
+
         @Condition
         public boolean evaluate() {
             return true;
         }
+
         @Action
         public void execute() {
             executed = true;
         }
+
         public boolean isExecuted() {
             return executed;
         }

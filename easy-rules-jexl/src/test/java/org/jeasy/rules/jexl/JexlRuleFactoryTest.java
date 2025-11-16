@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- *  Copyright (c) 2021, Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
+ *  Copyright (c) 2025, Philip Hackl (philip.hackl90@gmail.com)
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +23,16 @@
  */
 package org.jeasy.rules.jexl;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.apache.commons.jexl3.JexlBuilder;
+import org.apache.commons.jexl3.JexlEngine;
+import org.assertj.core.api.Assertions;
+import org.jeasy.rules.api.Rule;
+import org.jeasy.rules.api.Rules;
+import org.jeasy.rules.support.composite.UnitRuleGroup;
+import org.jeasy.rules.support.reader.JsonRuleDefinitionReader;
+import org.jeasy.rules.support.reader.YamlRuleDefinitionReader;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.File;
 import java.io.FileReader;
@@ -31,35 +40,17 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
-import org.apache.commons.jexl3.JexlBuilder;
-import org.apache.commons.jexl3.JexlEngine;
-import org.assertj.core.api.Assertions;
-import org.jeasy.rules.api.Rule;
-import org.jeasy.rules.api.Rules;
-import org.jeasy.rules.support.reader.JsonRuleDefinitionReader;
-import org.jeasy.rules.support.composite.UnitRuleGroup;
-import org.jeasy.rules.support.reader.YamlRuleDefinitionReader;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameter;
-import org.junit.runners.Parameterized.Parameters;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Lauri Kimmel
  * @author Mahmoud Ben Hassine
  */
-@RunWith(Parameterized.class)
 public class JexlRuleFactoryTest {
 
-    @Parameters
-    public static Collection<Object[]> params() {
+    public static Collection<Object[]> parameters() {
         Map<String, Object> namespaces = new HashMap<>();
         namespaces.put("sout", System.out);
         JexlEngine jexlEngine = new JexlBuilder()
@@ -72,14 +63,9 @@ public class JexlRuleFactoryTest {
         });
     }
 
-    @Parameter(0)
-    public JexlRuleFactory factory;
-
-    @Parameter(1)
-    public String ext;
-
-    @Test
-    public void testRulesCreation() throws Exception {
+    @ParameterizedTest
+    @MethodSource("parameters")
+    public void testRulesCreation(JexlRuleFactory factory, String ext) throws Exception {
         // given
         File rulesDescriptor = new File("src/test/resources/rules." + ext);
 
@@ -103,8 +89,9 @@ public class JexlRuleFactoryTest {
         assertThat(rule.getPriority()).isEqualTo(2);
     }
 
-    @Test
-    public void testRuleCreationFromFileReader() throws Exception {
+    @ParameterizedTest
+    @MethodSource("parameters")
+    public void testRuleCreationFromFileReader(JexlRuleFactory factory, String ext) throws Exception {
         // given
         Reader adultRuleDescriptorAsReader = new FileReader("src/test/resources/adult-rule." + ext);
 
@@ -117,8 +104,9 @@ public class JexlRuleFactoryTest {
         assertThat(adultRule.getPriority()).isEqualTo(1);
     }
 
-    @Test
-    public void testRuleCreationFromStringReader() throws Exception {
+    @ParameterizedTest
+    @MethodSource("parameters")
+    public void testRuleCreationFromStringReader(JexlRuleFactory factory, String ext) throws Exception {
         // given
         Reader adultRuleDescriptorAsReader = new StringReader(new String(Files.readAllBytes(Paths.get("src/test/resources/adult-rule." + ext))));
 
@@ -131,8 +119,9 @@ public class JexlRuleFactoryTest {
         assertThat(adultRule.getPriority()).isEqualTo(1);
     }
 
-    @Test
-    public void testRuleCreationFromFileReader_withCompositeRules() throws Exception {
+    @ParameterizedTest
+    @MethodSource("parameters")
+    public void testRuleCreationFromFileReader_withCompositeRules(JexlRuleFactory factory, String ext) throws Exception {
         // given
         File rulesDescriptor = new File("src/test/resources/composite-rules." + ext);
 
@@ -157,8 +146,9 @@ public class JexlRuleFactoryTest {
         assertThat(rule.getPriority()).isEqualTo(1);
     }
 
-    @Test
-    public void testRuleCreationFromFileReader_withInvalidCompositeRuleType() {
+    @ParameterizedTest
+    @MethodSource("parameters")
+    public void testRuleCreationFromFileReader_withInvalidCompositeRuleType(JexlRuleFactory factory, String ext) {
         // given
         File rulesDescriptor = new File("src/test/resources/composite-rule-invalid-composite-rule-type." + ext);
 
@@ -171,8 +161,9 @@ public class JexlRuleFactoryTest {
         // expected exception
     }
 
-    @Test
-    public void testRuleCreationFromFileReader_withEmptyComposingRules() {
+    @ParameterizedTest
+    @MethodSource("parameters")
+    public void testRuleCreationFromFileReader_withEmptyComposingRules(JexlRuleFactory factory, String ext) {
         // given
         File rulesDescriptor = new File("src/test/resources/composite-rule-invalid-empty-composing-rules." + ext);
 
@@ -185,8 +176,9 @@ public class JexlRuleFactoryTest {
         // expected exception
     }
 
-    @Test
-    public void testRuleCreationFromFileReader_withNonCompositeRuleDeclaresComposingRules() {
+    @ParameterizedTest
+    @MethodSource("parameters")
+    public void testRuleCreationFromFileReader_withNonCompositeRuleDeclaresComposingRules(JexlRuleFactory factory, String ext) {
         // given
         File rulesDescriptor = new File("src/test/resources/non-composite-rule-with-composing-rules." + ext);
 

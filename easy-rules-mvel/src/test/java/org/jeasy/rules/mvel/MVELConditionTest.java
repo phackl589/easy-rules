@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- *  Copyright (c) 2021, Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
+ *  Copyright (c) 2025, Philip Hackl (philip.hackl90@gmail.com)
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -25,10 +25,11 @@ package org.jeasy.rules.mvel;
 
 import org.jeasy.rules.api.Condition;
 import org.jeasy.rules.api.Facts;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mvel2.ParserContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MVELConditionTest {
 
@@ -47,14 +48,14 @@ public class MVELConditionTest {
     }
 
     // Note this behaviour is different in SpEL, where a missing fact is silently ignored and returns false
-    @Test(expected = RuntimeException.class)
+    @Test
     public void whenDeclaredFactIsNotPresent_thenShouldThrowRuntimeException() {
         // given
         Condition isHot = new MVELCondition("temperature > 30");
         Facts facts = new Facts();
 
         // when
-        boolean evaluationResult = isHot.evaluate(facts);
+        assertThrows(RuntimeException.class, () -> isHot.evaluate(facts));
 
         // then
         // expected exception

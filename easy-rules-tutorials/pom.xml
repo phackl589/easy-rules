@@ -21,28 +21,28 @@
     </properties>
 
     <scm>
-        <url>git@github.com:j-easy/easy-rules.git</url>
-        <connection>scm:git:git@github.com:j-easy/easy-rules.git</connection>
-        <developerConnection>scm:git:git@github.com:j-easy/easy-rules.git</developerConnection>
+        <url>git@github.com:phackl589/easy-rules.git</url>
+        <connection>scm:git:git@github.com:phackl589/easy-rules.git</connection>
+        <developerConnection>scm:git:git@github.com:phackl589/easy-rules.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/j-easy/easy-rules/issues</url>
+        <url>https://github.com/phackl589/easy-rules/issues</url>
     </issueManagement>
 
     <ciManagement>
         <system>Github Actions</system>
-        <url>https://github.com/j-easy/easy-rules/actions</url>
+        <url>https://github.com/phackl589/easy-rules/actions</url>
     </ciManagement>
 
     <developers>
         <developer>
-            <id>benas</id>
-            <name>Mahmoud Ben Hassine</name>
-            <url>http://benas.github.io</url>
-            <email>mahmoud.benhassine@icloud.com</email>
+            <id>phackl589</id>
+            <name>Philip Hackl</name>
+            <url>https://github.com/phackl589</url>
+            <email>philip.hackl90@gmail.com</email>
             <roles>
                 <role>Lead developer</role>
             </roles>

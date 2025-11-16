@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- *  Copyright (c) 2021, Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
+ *  Copyright (c) 2025, Philip Hackl (philip.hackl90@gmail.com)
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -30,14 +30,15 @@ import org.jeasy.rules.api.Facts;
 import org.jeasy.rules.api.Rules;
 import org.jeasy.rules.core.BasicRule;
 import org.jeasy.rules.core.DefaultRulesEngine;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ConditionalRuleGroupTest {
 
@@ -51,19 +52,19 @@ public class ConditionalRuleGroupTest {
 
     private DefaultRulesEngine rulesEngine = new DefaultRulesEngine();
 
-    @Before
+    @BeforeEach
     public void setUp() {
         conditionalRule = new TestRule("conditionalRule", "description0", 0, true);
         rule1 = new TestRule("rule1", "description1", 1, true);
         rule2 = new TestRule("rule2", "description2", 2, true);
         conditionalRuleGroup = new ConditionalRuleGroup();
         conditionalRuleGroup.addRule(rule1);
-        conditionalRuleGroup.addRule(rule2);           
+        conditionalRuleGroup.addRule(rule2);
         conditionalRuleGroup.addRule(conditionalRule);
         rules.register(conditionalRuleGroup);
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         rules.clear();
         actions.clear();
@@ -162,12 +163,12 @@ public class ConditionalRuleGroupTest {
         assertThat(annotatedRule.isExecuted()).isFalse();
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void twoRulesWithSameHighestPriorityIsNotAllowed() {
         conditionalRuleGroup.addRule(new MyOtherRule(0));// same priority as conditionalRule
         conditionalRuleGroup.addRule(new MyOtherRule(1));
         conditionalRuleGroup.addRule(new MyRule());
-        conditionalRuleGroup.evaluate(facts);
+        assertThrows(IllegalArgumentException.class, () -> conditionalRuleGroup.evaluate(facts));
     }
 
     @Test

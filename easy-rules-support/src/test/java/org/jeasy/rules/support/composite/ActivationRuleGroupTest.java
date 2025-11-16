@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- *  Copyright (c) 2021, Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
+ *  Copyright (c) 2025, Philip Hackl (philip.hackl90@gmail.com)
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -28,13 +28,10 @@ import org.jeasy.rules.annotation.Condition;
 import org.jeasy.rules.api.Facts;
 import org.jeasy.rules.api.Rules;
 import org.jeasy.rules.core.DefaultRulesEngine;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(MockitoJUnitRunner.class)
 public class ActivationRuleGroupTest {
 
     private Facts facts = new Facts();
@@ -93,7 +90,7 @@ public class ActivationRuleGroupTest {
         rules.register(activationRuleGroup);
 
         //then
-        rulesEngine.fire(rules,facts);
+        rulesEngine.fire(rules, facts);
 
         // rule4 will not be selected, so it should not be executed
         assertThat(rule4.isExecuted()).isFalse();
@@ -104,12 +101,18 @@ public class ActivationRuleGroupTest {
         private boolean executed;
 
         @Condition
-        public boolean when() { return true; }
+        public boolean when() {
+            return true;
+        }
 
         @Action
-        public void then() { executed = true; }
+        public void then() {
+            executed = true;
+        }
 
-        public boolean isExecuted() { return executed; }
+        public boolean isExecuted() {
+            return executed;
+        }
     }
 
     @org.jeasy.rules.annotation.Rule(priority = 2)
@@ -117,12 +120,18 @@ public class ActivationRuleGroupTest {
         private boolean executed;
 
         @Condition
-        public boolean when() { return true; }
+        public boolean when() {
+            return true;
+        }
 
         @Action
-        public void then() { executed = true; }
+        public void then() {
+            executed = true;
+        }
 
-        public boolean isExecuted() { return executed; }
+        public boolean isExecuted() {
+            return executed;
+        }
     }
 
     @org.jeasy.rules.annotation.Rule(priority = 2)
@@ -130,12 +139,18 @@ public class ActivationRuleGroupTest {
         private boolean executed;
 
         @Condition
-        public boolean when() { return true; }
+        public boolean when() {
+            return true;
+        }
 
         @Action
-        public void then() { executed = true; }
+        public void then() {
+            executed = true;
+        }
 
-        public boolean isExecuted() { return executed; }
+        public boolean isExecuted() {
+            return executed;
+        }
     }
 
     @org.jeasy.rules.annotation.Rule(priority = 1)
@@ -144,12 +159,18 @@ public class ActivationRuleGroupTest {
         private boolean executed;
 
         @Condition
-        public boolean when() { return false; }
+        public boolean when() {
+            return false;
+        }
 
         @Action
-        public void then() { executed = true; }
+        public void then() {
+            executed = true;
+        }
 
-        public boolean isExecuted() { return executed; }
+        public boolean isExecuted() {
+            return executed;
+        }
 
     }
 }

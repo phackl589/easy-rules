@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- *  Copyright (c) 2021, Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
+ *  Copyright (c) 2025, Philip Hackl (philip.hackl90@gmail.com)
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -29,10 +29,11 @@ import org.jeasy.rules.annotation.Fact;
 import org.jeasy.rules.annotation.Rule;
 import org.jeasy.rules.api.Facts;
 import org.jeasy.rules.api.Rules;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * Null facts are not accepted by design, a declared fact can be missing though.
@@ -50,7 +51,7 @@ public class MissingFactAnnotationParameterTest extends AbstractTest {
         Map<org.jeasy.rules.api.Rule, Boolean> results = rulesEngine.check(rules, facts);
 
         for (boolean b : results.values()) {
-            Assert.assertFalse(b);
+            assertFalse(b);
         }
     }
 
