@@ -18,3 +18,19 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       run: mvn clean package
+    - name: Dependency-Check
+      uses: dependency-check/Dependency-Check_Action@main
+      id: dependency-check
+      with:
+        project: 'test'
+        path: '.'
+        format: 'HTML'
+        out: 'reports' # this is the default, no need to specify unless you wish to override it
+        args: >
+           --failOnCVSS 7
+           --enableRetired
+    - name: Upload Test results
+      uses: actions/upload-artifact@main
+      with:
+        name: Dependency-Check report
+        path: ${{github.workspace}}/reports
