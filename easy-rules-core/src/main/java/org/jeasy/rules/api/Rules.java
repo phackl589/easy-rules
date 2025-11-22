@@ -137,6 +137,7 @@ public class Rules implements Iterable<Rule> {
     /**
      * Return an iterator on the rules set. It is not intended to remove rules
      * using this iterator.
+     *
      * @return an iterator on the rules set
      */
     @Override
@@ -144,6 +145,11 @@ public class Rules implements Iterable<Rule> {
         return rules.iterator();
     }
 
+    /**
+     * Find a rule by name.
+     *
+     * @param ruleName name of the rule to search for, must not be null
+     */
     private Optional<Rule> findRuleByName(String ruleName) {
         return rules.stream()
                 .filter(rule -> rule.getName().equalsIgnoreCase(ruleName))

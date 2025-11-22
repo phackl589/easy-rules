@@ -32,7 +32,7 @@ import java.util.Map;
 
 /**
  * Rule definition reader based on <a href="https://github.com/FasterXML/jackson">Jackson</a>.
- *
+ * <p>
  * This reader expects an array of rule definitions as input even for a single rule. For example:
  *
  * <pre>

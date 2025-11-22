@@ -70,9 +70,9 @@ public class MVELAction implements Action {
     public void execute(Facts facts) {
         try {
             MVEL.executeExpression(compiledExpression, facts.asMap());
-        } catch (Exception e) {
-            LOGGER.error("Unable to evaluate expression: '" + expression + "' on facts: " + facts, e);
-            throw e;
+        } catch (Exception ex) {
+            LOGGER.error("Unable to evaluate expression: '{}' on facts: {}", expression, facts, ex);
+            throw ex;
         }
     }
 }

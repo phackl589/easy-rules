@@ -37,7 +37,7 @@ import java.util.Set;
  * priority acts as a condition: if the rule with the highest priority evaluates
  * to true, then we try to evaluate the rest of the rules and execute the ones
  * that evaluate to true.
- * 
+ * <p>
  * <strong>This class is not thread-safe.</strong>
  *
  * @author Dag Framstad (dagframstad@gmail.com)
@@ -85,7 +85,7 @@ public class ConditionalRuleGroup extends CompositeRule {
 
     /**
      * A conditional rule group will trigger all its composing rules if the condition
-     * of the rule with highest priority evaluates to true.
+     * of the rule with the highest priority evaluates to true.
      * 
      * @param facts The facts.
      * @return true if the conditions of all composing rules evaluate to true
@@ -111,7 +111,6 @@ public class ConditionalRuleGroup extends CompositeRule {
      * (the one with the highest priority) first.
      *
      * @param facts The facts.
-     *
      * @throws Exception thrown if an exception occurs during actions performing
      */
     @Override

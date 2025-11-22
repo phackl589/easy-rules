@@ -51,6 +51,7 @@ public class Fact<T> {
 
 	/**
 	 * Get the fact name.
+     *
 	 * @return fact name
 	 */
 	public String getName() {
@@ -59,6 +60,7 @@ public class Fact<T> {
 
 	/**
 	 * Get the fact value.
+     *
 	 * @return fact value
 	 */
 	public T getValue() {

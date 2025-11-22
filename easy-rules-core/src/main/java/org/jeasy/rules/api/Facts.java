@@ -142,7 +142,7 @@ public class Facts implements Iterable<Fact<?>> {
 
     /**
      * Return an iterator on the set of facts. It is not intended to remove
-     * facts using this iterator outside of the rules engine (aka other than doing it through rules)
+     * facts using this iterator outside the rules engine (aka other than doing it through rules)
      * 
      * @return an iterator on the set of facts
      */

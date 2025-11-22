@@ -74,6 +74,18 @@ public abstract class AbstractRuleFactory {
                     ruleDefinition.getName(),
                     ruleDefinition.getCompositeRuleType());
         }
+        CompositeRule compositeRule = createCompositeRuleByType(ruleDefinition);
+        compositeRule.setDescription(ruleDefinition.getDescription());
+        compositeRule.setPriority(ruleDefinition.getPriority());
+
+        for (RuleDefinition composingRuleDefinition : ruleDefinition.getComposingRules()) {
+            compositeRule.addRule(createRule(composingRuleDefinition));
+        }
+
+        return compositeRule;
+    }
+
+    private CompositeRule createCompositeRuleByType(RuleDefinition ruleDefinition) {
         CompositeRule compositeRule;
         String name = ruleDefinition.getName();
         switch (ruleDefinition.getCompositeRuleType()) {
@@ -89,14 +101,6 @@ public abstract class AbstractRuleFactory {
             default:
                 throw new IllegalArgumentException("Invalid composite rule type, must be one of " + ALLOWED_COMPOSITE_RULE_TYPES);
         }
-        compositeRule.setDescription(ruleDefinition.getDescription());
-        compositeRule.setPriority(ruleDefinition.getPriority());
-
-        for (RuleDefinition composingRuleDefinition : ruleDefinition.getComposingRules()) {
-            compositeRule.addRule(createRule(composingRuleDefinition));
-        }
-
         return compositeRule;
     }
-
 }

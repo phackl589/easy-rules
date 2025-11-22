@@ -35,9 +35,9 @@ import java.util.TreeSet;
 
 /**
  * Base class representing a composite rule composed of a set of rules.
- * 
+ * <p>
  * <strong>This class is not thread-safe.
- * Sub-classes are inherently not thread-safe.</strong>
+ * Subclasses are inherently not thread-safe.</strong>
  *
  * @author Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
  */
@@ -96,6 +96,7 @@ public abstract class CompositeRule extends BasicRule {
 
     /**
      * Add a rule to the composite rule.
+     *
      * @param rule the rule to add
      */
     public void addRule(final Object rule) {
@@ -106,6 +107,7 @@ public abstract class CompositeRule extends BasicRule {
 
     /**
      * Remove a rule from the composite rule.
+     *
      * @param rule the rule to remove
      */
     public void removeRule(final Object rule) {
