@@ -38,7 +38,7 @@ import java.util.Objects;
 
 /**
  * Default {@link RulesEngine} implementation.
- *
+ * <p>
  * Rules are fired according to their natural order which is priority by default.
  * This implementation iterates over the sorted set of rules, evaluates the condition
  * of each rule and executes its actions if the condition evaluates to true.
@@ -99,11 +99,10 @@ public final class DefaultRulesEngine extends AbstractRulesEngine {
             try {
                 evaluationResult = rule.evaluate(facts);
             } catch (RuntimeException exception) {
-                LOGGER.error("Rule '" + name + "' evaluated with error", exception);
+                LOGGER.error("Rule '{}' evaluated with error", name, exception);
                 triggerListenersOnEvaluationError(rule, facts, exception);
-                // give the option to either skip next rules on evaluation error or continue by considering the evaluation error as false
                 if (parameters.isSkipOnFirstNonTriggeredRule()) {
-                    LOGGER.debug("Next rules will be skipped since parameter skipOnFirstNonTriggeredRule is set");
+                    logSkipMessage("skipOnFirstNonTriggeredRule");
                     break;
                 }
             }
@@ -116,14 +115,14 @@ public final class DefaultRulesEngine extends AbstractRulesEngine {
                     LOGGER.debug("Rule '{}' performed successfully", name);
                     triggerListenersOnSuccess(rule, facts);
                     if (parameters.isSkipOnFirstAppliedRule()) {
-                        LOGGER.debug("Next rules will be skipped since parameter skipOnFirstAppliedRule is set");
+                        logSkipMessage("skipOnFirstAppliedRule");
                         break;
                     }
                 } catch (Exception exception) {
-                    LOGGER.error("Rule '" + name + "' performed with error", exception);
+                    LOGGER.error("Rule '{}' performed with error", name, exception);
                     triggerListenersOnFailure(rule, exception, facts);
                     if (parameters.isSkipOnFirstFailedRule()) {
-                        LOGGER.debug("Next rules will be skipped since parameter skipOnFirstFailedRule is set");
+                        logSkipMessage("skipOnFirstFailedRule");
                         break;
                     }
                 }
@@ -131,11 +130,15 @@ public final class DefaultRulesEngine extends AbstractRulesEngine {
                 LOGGER.debug("Rule '{}' has been evaluated to false, it has not been executed", name);
                 triggerListenersAfterEvaluate(rule, facts, false);
                 if (parameters.isSkipOnFirstNonTriggeredRule()) {
-                    LOGGER.debug("Next rules will be skipped since parameter skipOnFirstNonTriggeredRule is set");
+                    logSkipMessage("skipOnFirstNonTriggeredRule");
                     break;
                 }
             }
         }
+    }
+
+    private void logSkipMessage(String parameterName) {
+        LOGGER.debug("Next rules will be skipped since parameter '{}' is set", parameterName);
     }
 
     private void logEngineParameters() {

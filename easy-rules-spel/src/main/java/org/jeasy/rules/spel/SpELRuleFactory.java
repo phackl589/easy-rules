@@ -102,7 +102,7 @@ public class SpELRuleFactory extends AbstractRuleFactory {
 
     /**
      * Create a new {@link SpELRule} from a Reader.
-     * 
+     * <p>
      * The rule descriptor should contain a single rule definition.
      * If no rule definitions are found, a {@link IllegalArgumentException} will be thrown.
      * If more than a rule is defined in the descriptor, the first rule will be returned.

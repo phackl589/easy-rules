@@ -55,6 +55,7 @@ public abstract class AbstractRulesEngine implements RulesEngine {
 
     /**
      * Return a copy of the rules engine parameters.
+     *
      * @return copy of the rules engine parameters
      */
     @Override
@@ -69,6 +70,7 @@ public abstract class AbstractRulesEngine implements RulesEngine {
 
     /**
      * Return an unmodifiable list of the registered rule listeners.
+     *
      * @return an unmodifiable list of the registered rule listeners
      */
     @Override
@@ -78,6 +80,7 @@ public abstract class AbstractRulesEngine implements RulesEngine {
 
     /**
      * Return an unmodifiable list of the registered rules engine listeners
+     *
      * @return an unmodifiable list of the registered rules engine listeners
      */
     @Override

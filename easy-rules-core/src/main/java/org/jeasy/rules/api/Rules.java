@@ -137,6 +137,7 @@ public class Rules implements Iterable<Rule> {
     /**
      * Return an iterator on the rules set. It is not intended to remove rules
      * using this iterator.
+     *
      * @return an iterator on the rules set
      */
     @Override

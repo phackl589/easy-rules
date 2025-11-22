@@ -30,7 +30,7 @@ import org.jeasy.rules.api.Rule;
 
 /**
  * Basic rule implementation class that provides common methods.
- *
+ * <p>
  * You can extend this class and override {@link BasicRule#evaluate(Facts)} and {@link BasicRule#execute(Facts)} to provide rule
  * conditions and actions logic.
  *

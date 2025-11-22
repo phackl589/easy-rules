@@ -25,7 +25,7 @@ package org.jeasy.rules.api;
 
 /**
  * Abstraction for a rule that can be fired by a rules engine.
- *
+ * <p>
  * Rules are registered in a namespace of rule of type {@link Rules}
  * in which they must have a <strong>unique</strong> name.
  *

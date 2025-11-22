@@ -62,9 +62,9 @@ public class JexlAction implements Action {
         MapContext ctx = new MapContext(facts.asMap());
         try {
             compiledScript.execute(ctx);
-        } catch (JexlException e) {
-            LOGGER.error("Unable to execute expression: '" + expression + "' on facts: " + facts, e);
-            throw e;
+        } catch (JexlException ex) {
+            LOGGER.error("Unable to execute expression: '{}' on facts: {}", expression, facts, ex);
+            throw ex;
         }
     }
 }
